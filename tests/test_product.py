@@ -28,9 +28,3 @@ def test_product_properties(products):
     product2 = products[3]
     assert product2.name == "55\" QLED 4K"
     assert product2.quantity == 7
-
-
-
-
-
-
