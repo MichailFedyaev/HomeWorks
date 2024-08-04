@@ -108,6 +108,17 @@ def second_category():
 
 
 @pytest.fixture
+def product_dict():
+    return {
+        "name": "Xiaomi Redmi Note 11",
+        "description": "1024GB, Синий",
+        "price": 31000.0,
+        "quantity": 14,
+    }
+
+
+
+@pytest.fixture
 def products(product_data):
     products_list = []
     for category in product_data:

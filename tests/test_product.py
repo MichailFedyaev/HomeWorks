@@ -1,3 +1,5 @@
+from src.product import Product
+
 
 def test_product_initialization(product, product1):
     assert product.name == "Samsung Galaxy C23 Ultra"
@@ -28,3 +30,29 @@ def test_product_properties(products):
     product2 = products[3]
     assert product2.name == "55\" QLED 4K"
     assert product2.quantity == 7
+
+
+def test_new_product(product_dict):
+    product4 = Product.new_product(product_dict)
+    assert product4.name == "Xiaomi Redmi Note 11"
+    assert product4.description == "1024GB, Синий"
+    assert product4.price == 31000.0
+    assert product4.quantity == 14
+
+
+def test_prod_price_property(capsys, product):
+    product.price = -756.57
+    message = capsys.readouterr()
+    assert message.out.strip() == "Цена не должна быть нулевая или отрицательная"
+    product.price = 756.57
+    assert product.price == 756.57
+
+
+def test_product_price_setter(product):
+    assert product.price == 180000.0
+    product.price = -50
+    assert product.price == 180000.0
+    product.price = 0
+    assert product.price == 180000.0
+    product.price = 150
+    assert product.price == 150.0

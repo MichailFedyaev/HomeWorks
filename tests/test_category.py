@@ -1,3 +1,5 @@
+import pytest
+
 
 def test_category_initialization(category_data):
     """Тест для проверки инициализации категории."""
@@ -10,7 +12,7 @@ def test_category_initialization(category_data):
 def test_category(first_category, second_category):
     assert first_category.name == "Category"
     assert first_category.description == "Description of the category"
-    assert len(first_category.products) == 2
+    assert len(first_category.add_product_list) == 2
 
     assert first_category.category_count == 4
     assert second_category.category_count == 4
@@ -19,10 +21,19 @@ def test_category(first_category, second_category):
     assert second_category.product_count == 9
 
 
-def test_category_products(category_data):
-    """Тест для проверки продуктов в категориях."""
-    assert len(category_data[0].products) == 3
-    assert category_data[0].products[0]['name'] == "Samsung Galaxy C23 Ultra"
+def test_cat_get_product_list_property(first_category, second_category):
+    with pytest.raises(AttributeError):
+        print(first_category.__products)
 
-    assert len(category_data[1].products) == 1
-    assert category_data[1].products[0]['name'] == "55\" QLED 4K"
+    assert (
+            first_category.add_product_str
+            == "Product, Description of the product руб. Остаток: 10 шт.\n"
+               "Product number two, Description of the product number two руб. Остаток: 34 шт.\n"
+    )
+
+    assert (
+            second_category.add_product_str
+            == "Product, Description of the product руб. Остаток: 10 шт.\n"
+               "Product number two, Description of the product number two руб. Остаток: 34 шт.\n"
+               "Product three, Description of the product three руб. Остаток: 32 шт.\n"
+    )
