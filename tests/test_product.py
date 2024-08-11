@@ -56,3 +56,11 @@ def test_product_price_setter(product):
     assert product.price == 180000.0
     product.price = 150
     assert product.price == 150.0
+
+
+def test_product_str(first_product):
+    assert str(first_product) == "Xiaomi Redmi Note 11, 31000 руб. Остаток: 14 шт."
+
+
+def test_product_add(first_product, second_product):
+    assert first_product + second_product == 1334000

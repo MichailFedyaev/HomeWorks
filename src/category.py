@@ -1,4 +1,6 @@
 from src.product import Product
+from typing import List
+
 
 class Category:
     """Категория товара"""
@@ -17,17 +19,24 @@ class Category:
         Category.category_count += 1
         Category.product_count += len(products)
 
-    def add_product(self, product: Product):
+    def __str__(self) -> str:
+        total = sum(product.quantity for product in self.__products)
+        return f"{self.name}, количество продуктов: {total} шт."
+
+    def add_product(self, product: Product) -> None:
+        """Метод для добавления продукта в экземпляр класса Category."""
         self.__products.append(product)
         Category.product_count += 1
 
     @property
-    def add_product_str(self):
+    def product_str(self) -> str:
+        """Геттер для получения списка продуктов в виде строк."""
         product_str = ""
         for product in self.__products:
-            product_str += f'{product.name}, {product.description} руб. Остаток: {product.quantity} шт.\n'
+            product_str += f"{str(product)}\n"
         return product_str
 
     @property
-    def add_product_list(self):
+    def product_list(self) -> List[Product]:
+        """Геттер для получения списка продуктов."""
         return self.__products
