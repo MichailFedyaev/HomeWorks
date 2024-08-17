@@ -14,6 +14,8 @@
 ## Функции, классы которые мы будем использовать в этой версии кода:
 - Класс Category который работает со списком товаров.
 - Класс ProductIterator для итерации по товарам в категории.
+- Класс Smartphone который работает с категорией "Смартфоны"
+- Класс LawnGrass который работает с категорией "Трава газонная"
 - Класс Product который работает с объектами класса продуктов
 - Функция для преобразования json файла в список словарей.
 - Функция для чтения файла и создания объекты классов.
@@ -27,14 +29,18 @@
 Name                     Stmts   Miss  Cover
 --------------------------------------------
 src\__init__.py              0      0   100%
-src\category.py             29      2    93%
-src\product.py              29      0   100%
+src\category.py             31      4    87%
+src\lawn_grass.py           11      0   100%
+src\product.py              31      1    97%
+src\smartphone.py           12      0   100%
 tests\__init__.py            0      0   100%
-tests\conftest.py           47      0   100%
+tests\conftest.py           61      0   100%
 tests\test_category.py      21      0   100%
+tests\test_lawn_grass.py    17      0   100%
 tests\test_product.py       48      0   100%
+tests\test_smartphone.py    18      0   100%
 --------------------------------------------
-TOTAL                      174      2    99%
+TOTAL                      250      5    98%
 
 
 
