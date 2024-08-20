@@ -1,8 +1,9 @@
 from src.product import Product
 from typing import List
+from src.order_category_property import OrderCategoryProperties
 
 
-class Category:
+class Category(OrderCategoryProperties):
     """Категория товара"""
 
     category_count = 0
@@ -13,6 +14,7 @@ class Category:
     products: list
 
     def __init__(self, name, description, products):
+        super().__init__(name, description)
         self.name = name
         self.description = description
         self.__products = products

@@ -1,5 +1,9 @@
-class Product:
-    """Категория продуктов."""
+from src.base_product import BaseProduct
+from src.print_mixin import PrintMixin
+
+
+class Product(BaseProduct, PrintMixin):
+    """Класс продуктов."""
     name: str
     description: str
     price: float
@@ -10,6 +14,7 @@ class Product:
         self.description = description
         self.__price = price
         self.quantity = quantity
+        super().__init__()
 
     def __str__(self) -> str:
         return f"{self.name}, {round(self.price)} руб. Остаток: {self.quantity} шт."
