@@ -33,6 +33,11 @@ category2 = Category(
 
 
 @pytest.fixture
+def categories() -> tuple:
+    return category1, category2
+
+
+@pytest.fixture
 def product_data():
     return [
         {

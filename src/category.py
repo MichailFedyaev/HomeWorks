@@ -1,6 +1,7 @@
 from src.product import Product
 from typing import List
 from src.order_category_property import OrderCategoryProperties
+from src.quantity_error import IncorrectProductQuantityError
 
 
 class Category(OrderCategoryProperties):
@@ -11,7 +12,7 @@ class Category(OrderCategoryProperties):
 
     name: str
     description: str
-    products: list
+    products: list[Product]
 
     def __init__(self, name, description, products):
         super().__init__(name, description)
@@ -28,10 +29,29 @@ class Category(OrderCategoryProperties):
     def add_product(self, product: Product) -> None:
         """Метод для добавления продукта в экземпляр класса Category."""
         if isinstance(product, Product):
-            self.__products.append(product)
-            Category.product_count += 1
+            try:
+                if product.quantity == 0:
+                    raise IncorrectProductQuantityError()
+            except IncorrectProductQuantityError as e:
+                print(e)
+            else:
+                self.__products.append(product)
+                Category.product_count += 1
+                print(f"Товар '{product.name}' успешно добавлен.")
+            finally:
+                print("Обработка добавления товара завершена.")
         else:
             raise TypeError()
+
+    def middle_price(self) -> float:
+        """Метод для подсчёта среднего ценника товара."""
+        total = sum(product.price for product in self.__products)
+        try:
+            avg = total / len(self.__products)
+        except ZeroDivisionError:
+            return 0
+        else:
+            return round(avg, 2)
 
     @property
     def product_str(self) -> str:
