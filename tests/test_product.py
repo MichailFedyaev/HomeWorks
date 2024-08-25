@@ -1,4 +1,7 @@
 from src.product import Product
+import pytest
+from contextlib import redirect_stdout
+import io
 
 
 def test_product_initialization(product, product1):
@@ -41,11 +44,14 @@ def test_new_product(product_dict):
 
 
 def test_prod_price_property(capsys, product):
-    product.price = -756.57
-    message = capsys.readouterr()
-    assert message.out.strip() == "Цена не должна быть нулевая или отрицательная"
-    product.price = 756.57
-    assert product.price == 756.57
+    f = io.StringIO()
+
+    with redirect_stdout(f):
+        product.price = -756.57
+
+    message = f.getvalue()
+
+    assert message.strip() == 'Цена не должна быть нулевая или отрицательная'
 
 
 def test_product_price_setter(product):
@@ -64,3 +70,10 @@ def test_product_str(first_product):
 
 def test_product_add(first_product, second_product):
     assert first_product + second_product == 1334000
+
+
+def test_product_init_value_error() -> None:
+    with pytest.raises(ValueError) as e:
+        Product("test", "incorrect quantity", 10, 0)
+
+    assert str(e.value) == "Товар с нулевым количеством не может быть добавлен."

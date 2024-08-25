@@ -2,6 +2,8 @@ import pytest
 
 from src.product import Product
 from src.category import Category
+from src.lawn_grass import LawnGrass
+from src.smartphone import Smartphone
 
 
 @pytest.fixture
@@ -18,16 +20,21 @@ product_1 = Product("Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200
 product_2 = Product("Iphone 15", "512GB, Gray space", 210000.0, 8)
 product_3 = Product('55" QLED 4K', "Фоновая подсветка", 123000.0, 7)
 
-category1 = Category(
-    "Смартфоны",
-    "Смартфоны, как средство не только коммуникации, но и получения дополнительных функций для удобства жизни",
-    [product1, product_2],
-)
-category2 = Category(
-    "Телевизоры",
-    "Современный телевизор, который позволяет наслаждаться просмотром, станет вашим другом и помощником",
-    [product_3],
-)
+
+@pytest.fixture
+def categories() -> tuple:
+    category1 = Category(
+        "Смартфоны",
+        "Смартфоны, как средство не только коммуникации, но и получения дополнительных функций для удобства жизни",
+        [product_1, product_2],
+    )
+    category2 = Category(
+        "Телевизоры",
+        "Современный телевизор, который позволяет наслаждаться просмотром, станет вашим другом и помощником",
+        [product_3],
+    )
+
+    return category1, category2
 
 
 @pytest.fixture
@@ -174,3 +181,27 @@ def category_data(product_data):
         category = Category(data['name'], data['description'], data['products'])
         categories.append(category)
     return categories
+
+
+@pytest.fixture
+def smartphone1() -> Smartphone:
+    return Smartphone("Smartphone1", "Description1", 50_000.0, 5, 98.2,
+                      "Model X", 250, "Black")
+
+
+@pytest.fixture
+def smartphone2() -> Smartphone:
+    return Smartphone("Smartphone2", "Description2", 40_000.0, 10, 78.2,
+                      "Model Y", 150, "White")
+
+
+@pytest.fixture
+def lawn_grass1() -> LawnGrass:
+    return LawnGrass("Газонная трава", "Элитная трава для газона", 500.0, 20,
+                     "Россия", "7 дней", "Зеленый")
+
+
+@pytest.fixture
+def lawn_grass2() -> LawnGrass:
+    return LawnGrass("Газонная трава 2", "Выносливая трава", 450.0, 15
+                     , "США", "5 дней", "Темно-зеленый")
