@@ -1,5 +1,6 @@
 from src.base_product import BaseProduct
 from src.print_mixin import PrintMixin
+from typing import List
 
 
 class Product(BaseProduct, PrintMixin):
@@ -11,7 +12,7 @@ class Product(BaseProduct, PrintMixin):
 
     def __init__(self, name, description, price, quantity):
         if quantity == 0:
-            raise ValueError('Товар с нулевым количеством не может быть добавлен')
+            raise ValueError('Товар с нулевым количеством не может быть добавлен.')
 
         self.name = name
         self.description = description

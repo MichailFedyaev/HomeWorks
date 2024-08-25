@@ -18,9 +18,10 @@ def test_order_init(smartphone1: Smartphone) -> None:
     assert order1.total_price == 150_000
 
 
-def test_order_init_error(smartphone1: Smartphone) -> None:
-    with pytest.raises(ValueError):
-        Order(smartphone1, 6)
+def test_order_init_error(capsys, smartphone1: Smartphone) -> None:
+    Order(smartphone1, 6)
+    message = capsys.readouterr()
+    assert message.out.split("\n")[1] == "Товар Smartphone1 в настоящее время на складе доступен в количестве 5 штук."
 
 
 def test_order_str(smartphone1: Smartphone) -> None:
@@ -31,3 +32,14 @@ def test_order_str(smartphone1: Smartphone) -> None:
     expected = "Куплено: Smartphone1, 2 шт.\n" "Описание товара: Description1\n" "Сумма покупки: 100000 руб"
 
     assert info_string == expected
+
+
+def test_order_init_zero_error(capsys, smartphone1: Smartphone) -> None:
+    Order(smartphone1, 0)
+
+    message = capsys.readouterr()
+    failed, completed = message.out.strip().split("\n")[1:]
+
+    assert failed == "Невозможно добавить товар с нулевым количеством."
+
+    assert completed == "Обработка добавления товара в заказ завершена."

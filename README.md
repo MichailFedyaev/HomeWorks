@@ -17,6 +17,7 @@
 - Класс Smartphone который работает с категорией "Смартфоны".
 - Класс LawnGrass который работает с категорией "Трава газонная".
 - Класс Order для представления заказа.
+- Класс исключений QuantityError при не корректном выводе товара.
 - Абстрактный класс OrderCategoryProperties для общих свойств классов Заказ и Категория.
 - Абстрактный класс BaseProduct для представления продукта.
 - Класс-миксин PrintMixin, который печатает в консоль информацию о инициализации экземпляров класса.
@@ -34,23 +35,25 @@ Name                     Stmts   Miss  Cover
 ----------------------------------------------------
 src\__init__.py                      0      0   100%
 src\base_product.py                  7      1    86%
-src\category.py                     33      4    88%
+src\category.py                     48      1    98%
 src\lawn_grass.py                   11      0   100%
-src\order.py                        13      0   100%
+src\order.py                        21      0   100%
 src\order_category_property.py       8      1    88%
 src\print_mixin.py                   5      0   100%
-src\product.py                      34      1    97%
+src\product.py                      37      1    97%
+src\quantity_error.py                5      0   100%
 src\smartphone.py                   12      0   100%
 tests\__init__.py                    0      0   100%
-tests\conftest.py                   61      0   100%
-tests\test_category.py              21      0   100%
+tests\conftest.py                   64      0   100%
+tests\test_category.py              48      0   100%
 tests\test_lawn_grass.py            17      0   100%
-tests\test_order.py                 20      0   100%
+tests\test_order.py                 27      0   100%
 tests\test_print_mixin.py           13      0   100%
-tests\test_product.py               48      0   100%
+tests\test_product.py               55      0   100%
 tests\test_smartphone.py            18      0   100%
 ----------------------------------------------------
-TOTAL                              321      7    98%
+TOTAL                              396      4    99%
+
 
 
 

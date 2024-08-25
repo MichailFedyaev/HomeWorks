@@ -44,12 +44,12 @@ class Category(OrderCategoryProperties):
             raise TypeError()
 
     def middle_price(self) -> float:
-        """Метод для подсчёта среднего ценника товара."""
+        """Метод для подсчета среднего ценника всех товаров."""
         total = sum(product.price for product in self.__products)
         try:
             avg = total / len(self.__products)
         except ZeroDivisionError:
-            return 0
+            return 0.0
         else:
             return round(avg, 2)
 

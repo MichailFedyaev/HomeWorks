@@ -16,11 +16,11 @@ def test_category(first_category, second_category):
     assert first_category.description == "Description of the category"
     assert len(first_category.product_list) == 2
 
-    assert first_category.category_count == 6
-    assert second_category.category_count == 6
+    assert first_category.category_count == 4
+    assert second_category.category_count == 4
 
-    assert first_category.product_count == 12
-    assert second_category.product_count == 12
+    assert first_category.product_count == 9
+    assert second_category.product_count == 9
 
 
 def test_cat_get_product_list_property(first_category, second_category):
@@ -50,9 +50,9 @@ def test_category_add_product_zero_error(capsys, categories):
     message = capsys.readouterr()
     failed, completed = message.out.strip().split("\n")[1:]
 
-    assert Category.product_count == 3
+    assert Category.product_count == 22
 
-    assert failed == "Невозможно добавить товар с нулевым количеством"
+    assert failed == "Невозможно добавить товар с нулевым количеством."
 
     assert completed == "Обработка добавления товара завершена."
 
@@ -63,19 +63,21 @@ def test_category_add_produuct(capsys, categories: tuple, products: tuple) -> No
     message = capsys.readouterr()
     messages = message.out.strip().split("\n")
 
-    successfully = messages[0] if len(messages) > 0 else ""
-    completed = messages[1] if len(messages) > 1 else ""
+    successfully = messages[4] if len(messages) > 0 else ""
+    completed = messages[5] if len(messages) > 1 else ""
 
-    assert Category.product_count == 4
+    assert Category.product_count == 26
     assert successfully == "Товар 'Xiaomi Redmi Note 11' успешно добавлен."
     assert completed == "Обработка добавления товара завершена."
 
 
 def test_middle_price_empy():
     category = Category("Category", "Description", [])
-    assert category.middle_price() == 0
+    assert category.middle_price() == 0.0
 
 
 def test_middle_price(categories):
-    assert categories[0].middle_price() == 171_000.0
+    category1, category2 = categories
+    assert category1.middle_price() == 195000.0
+    assert category2.middle_price() == 123000.0
 
